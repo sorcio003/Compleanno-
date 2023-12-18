@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Auguri di Compleanno!</title>
+  <title>Festa di Compleanno!</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -11,63 +11,61 @@
       background-color: #f8f8f8;
       margin: 0;
       padding: 0;
+      overflow: hidden;
     }
 
-    #container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+    #confetti-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
     }
 
-    #birthdayText {
-      font-size: 24px;
-      color: #333;
-      opacity: 0;
-      transform: translateY(50px);
-      animation: fadeInUp 1s ease-out forwards;
-    }
-
-    #decorations {
-      display: flex;
-      margin-top: 20px;
-      opacity: 0;
-      transform: translateY(50px);
-      animation: fadeInUp 1s ease-out 0.5s forwards;
-    }
-
-    .decoration {
-      width: 20px;
-      height: 20px;
-      background-color: #ffcc00;
+    .confetti {
+      position: absolute;
+      background: #ffcc00;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
-      margin: 0 10px;
-      animation: bounce 0.5s infinite alternate;
+      opacity: 0;
+      animation: fall 2s ease-out infinite;
     }
 
-    @keyframes fadeInUp {
-      to {
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
         opacity: 1;
-        transform: translateY(0);
       }
-    }
-
-    @keyframes bounce {
-      to {
-        transform: translateY(-10px);
+      100% {
+        transform: translateY(600px) rotate(360deg);
+        opacity: 0;
       }
     }
   </style>
 </head>
 <body>
-  <div id="container">
-    <div id="birthdayText">Tanti Auguri di Compleanno!</div>
-    <div id="decorations">
-      <div class="decoration"></div>
-      <div class="decoration"></div>
-      <div class="decoration"></div>
-    </div>
-  </div>
+  <div id="confetti-container"></div>
+
+  <h1>Tanti Auguri di Compleanno!</h1>
+
+  <script>
+    function createConfetti() {
+      const confettiContainer = document.getElementById('confetti-container');
+
+      for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = `${Math.random() * 100}vw`;
+        confettiContainer.appendChild(confetti);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      createConfetti();
+    });
+  </script>
 </body>
 </html>
