@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Festa di Compleanno!</title>
+  <title>Happy Birthday!</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
       text-align: center;
-      background-color: #f8f8f8;
+      background-color: #87CEEB; /* Light Sky Blue */
       margin: 0;
       padding: 0;
       overflow: hidden;
@@ -26,7 +26,7 @@
 
     .confetti {
       position: absolute;
-      background: #ffcc00;
+      background: #ffcc00; /* Gold */
       width: 10px;
       height: 10px;
       border-radius: 50%;
@@ -44,12 +44,50 @@
         opacity: 0;
       }
     }
+
+    #balloon {
+      position: relative;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    #birthdayText {
+      font-size: 24px;
+      color: #fff;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: fadeInUp 1s ease-out forwards;
+      transition: color 0.5s;
+    }
+
+    #birthdayText:hover {
+      color: #ffcc00; /* Gold */
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
 </head>
 <body>
   <div id="confetti-container"></div>
 
-  <h1>Tanti Auguri di Compleanno!</h1>
+  <div id="balloon">
+    🎈
+  </div>
+
+  <h1 id="birthdayText">Tanti Auguri di Compleanno!</h1>
 
   <script>
     function createConfetti() {
